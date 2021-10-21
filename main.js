@@ -8,6 +8,7 @@ leftWristX=0;
 leftWristY=0;
 rightWristX=0;
 rightWristY=0;
+scoreleftwrist=0;
 function setup(){
 canvas=createCanvas(600,500);
 canvas.center();
@@ -28,8 +29,19 @@ if(results.lenght>0){-
     rightWristX=results[0].pose.rightWrist.x;
     rightWristY=results[0].pose.rightWrist.y;
     console.log("rightWristX="+rightWristX+"rightWristY="+rightWristY);
+    scoreleftwrist=results[0].pose.keypoints[9].score;
 }
 }
 function draw(){
 image(video,0,0,600,500);
+fill('#ff0000');
+stroke('#ff0000');
+if(scoreleftwrist>0.2){
+    circle(leftWristX,leftWristY,20);
+    song1.stop();
+    song_play=song.isPlaying();
+    if(song_play=="fulse"){
+        song.play();
+    }
+}
 }
